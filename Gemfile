@@ -67,6 +67,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+gem "graphql"
 gem "graphiql-rails", group: :development
 gem 'devise'
 gem 'pg'
