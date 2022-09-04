@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'launch/index'
   devise_for :users
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
@@ -8,5 +9,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "spa#index"
+  root "launch#index"
 end
