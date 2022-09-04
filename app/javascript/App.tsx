@@ -1,39 +1,34 @@
 import React from 'react';
-import { Container, Row, Col, Button, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-
+import { Container, Row, Col, Button, Nav, Navbar } from 'react-bootstrap';
+import { Routes, Route, Link } from "react-router-dom";
+import SearchBar from './components/SearchBar';
+import Authors from './pages/Authors';
+import Books from './pages/Books';
+import Narrators from './pages/Narrators';
 function App() {
     return (
         <section>
             <Navbar bg="light" expand="lg">
                 <Container>
-                    <Navbar.Brand href="#home">AudioBooker</Navbar.Brand>
+                    <Navbar.Brand href="/">AudioBooker</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#link">Link</Nav.Link>
-                            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">
-                                    Another action
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">
-                                    Separated link
-                                </NavDropdown.Item>
-                            </NavDropdown>
+                            <Nav.Link href="/app/books">AudioBooks</Nav.Link>
+                            <Nav.Link href="/app/authors">Authors</Nav.Link>
+                            <Nav.Link href="/app/narrators">Narrators</Nav.Link>
                         </Nav>
+                        <SearchBar />
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
             <Container>
-                <Row>
-                    <Col>
-                        <Button>Ready</Button>
-
-                    </Col>
-                </Row>
+                <Routes>
+                    <Route path="/" element={<Books />} />
+                    <Route path="/app/books" element={<Books />} />
+                    <Route path="/app/narrators" element={<Narrators />} />
+                    <Route path="/app/authors" element={<Authors />} />
+                </Routes>
             </Container>
         </section>
 

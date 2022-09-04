@@ -11,13 +11,13 @@ module Types
     field :published, GraphQL::Types::ISO8601Date
     field :identifiers, [Types::BookIdentifierType]
     field :top_reviews, [Types::ReviewType]
-    
+
     def identifiers
-        object.book_identifiers
+      object.book_identifiers
     end
 
     def top_reviews
       object.reviews
-  end
+    end
   end
 end
