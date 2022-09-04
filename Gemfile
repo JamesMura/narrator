@@ -73,4 +73,6 @@ gem 'devise'
 gem 'graphiql-rails', group: :development
 gem 'graphql'
 gem 'pg'
+gem 'rails_admin', '~> 3.0'
 gem 'rubocop', require: false
+gem 'sassc-rails'
