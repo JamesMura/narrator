@@ -1,8 +1,8 @@
 overwrite: true
 schema: "http://127.0.0.1:5100/graphql"
-documents: "app/javascript/**/*.gql"
+documents: "app/typescript/**/*.gql"
 generates:
-  app/javascript/graphql/generated/graphql.tsx:
+  app/typescript/graphql/generated/graphql.tsx:
     plugins:
       - "typescript"
       - "typescript-operations"
