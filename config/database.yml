@@ -12,15 +12,15 @@ default: &default
 
 development:
   <<: *default
-  database: aubook_development
+  database: audio_narrator_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: aubook_test
+  database: audio_narrator_test
 
 production:
   <<: *default
-  database: aubook_production
+  database: audio_narrator_production
