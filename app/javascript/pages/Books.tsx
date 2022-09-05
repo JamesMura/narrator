@@ -1,43 +1,72 @@
-import React from 'react';
-import { Carousel } from 'react-bootstrap';
-function Books() {
-    return <Carousel >
-        <Carousel.Item>
-            <img
-                className="d-block w-100"
-                src="holder.js/800x400?text=First slide&bg=f5f5f5"
-                alt="First slide"
-            />
-            <Carousel.Caption>
-                <h5>First slide label</h5>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-            <img
-                className="d-block w-100"
-                src="holder.js/800x400?text=Second slide&bg=eee"
-                alt="Second slide"
-            />
-            <Carousel.Caption>
-                <h5>Second slide label</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-            <img
-                className="d-block w-100"
-                src="holder.js/800x400?text=Third slide&bg=e5e5e5"
-                alt="Third slide"
-            />
-            <Carousel.Caption>
-                <h5>Third slide label</h5>
-                <p>
-                    Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                </p>
-            </Carousel.Caption>
-        </Carousel.Item>
-    </Carousel>
+import React from "react";
+import { Card, Carousel, Col, Row } from "react-bootstrap";
+import {
+  useGetBooksQuery,
+  useGetFeaturedBooksQuery,
+} from "@/graphql/generated/graphql";
+import { useNavigate } from "react-router";
+function FeaturedBooks() {
+  const { data, loading, error } = useGetFeaturedBooksQuery();
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+  let featuredBookItems = data?.featuredBooks?.map(
+    ({ id, title, avatarUrl, description }) => (
+      <Carousel.Item key={id}>
+        <img
+          className="d-block w-100"
+          src={avatarUrl || ""}
+          alt={title || ""}
+        />
+        <Carousel.Caption>
+          <h5>{title}</h5>
+          <p>{description}</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    )
+  );
+  return <Carousel>{featuredBookItems}</Carousel>;
 }
 
-export default Books
+function BookList() {
+  let navigate = useNavigate();
+  const { data, loading, error } = useGetBooksQuery();
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+  let bookCards = data?.books?.map(({ id, title, avatarUrl, description }) => (
+    <Card
+      style={{ width: "18rem" }}
+      key={id}
+      onClick={() => {
+        console.log("ready");
+        navigate(`/app/books/${id}`);
+      }}
+    >
+      <Card.Img variant="top" src={avatarUrl || ""} />
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>{description}</Card.Text>
+      </Card.Body>
+    </Card>
+  ));
+  return <div>{bookCards}</div>;
+}
+function Books() {
+  return (
+    <div>
+      <Row>
+        <Col />
+        <Col>
+          <FeaturedBooks />
+        </Col>
+        <Col />
+      </Row>
+      <Row>
+        <Col>
+          <BookList />
+        </Col>
+      </Row>
+    </div>
+  );
+}
+
+export default Books;

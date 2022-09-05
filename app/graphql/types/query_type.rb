@@ -11,10 +11,22 @@ module Types
     field :featured_books, [BookType] do
       argument :count, Integer, required: false, default_value: 3
     end
-    field :authros, [AuthorType]
+    field :book, BookType do
+      argument :id, Integer, required: true
+    end
+    field :books, [BookType]
+    field :authors, [AuthorType]
     field :narrators, [NarratorType]
     def featured_books(count:)
+      Book.first(count)
+    end
+
+    def books
       Book.all
+    end
+
+    def book(id:)
+      Book.find(id)
     end
 
     def authors

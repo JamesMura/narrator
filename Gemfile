@@ -72,6 +72,7 @@ end
 gem 'devise'
 gem 'graphiql-rails', group: :development
 gem 'graphql'
+gem 'image_processing', '>= 1.2'
 gem 'pg'
 gem 'rails_admin', '~> 3.0'
 gem 'rubocop', require: false

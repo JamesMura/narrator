@@ -1,0 +1,52 @@
+query GetFeaturedBooks {
+  featuredBooks {
+    id
+    title
+    avatarUrl
+    description
+  }
+}
+
+query GetBooks {
+  books {
+    id
+    title
+    avatarUrl
+    description
+  }
+}
+
+query GetBook($id: Int!) {
+  book(id: $id) {
+    id
+    title
+    avatarUrl
+    description
+    identifiers {
+      id
+      idType
+    }
+    author {
+      id
+      name
+    }
+  }
+}
+
+query GetAuthors {
+  authors {
+    id
+    name
+    avatarUrl
+    bio
+  }
+}
+
+query GetNarrators {
+  narrators {
+    id
+    name
+    avatarUrl
+    bio
+  }
+}
